@@ -11,6 +11,14 @@
 |
 */
 
+use App\Models\Score;
+use App\Http\Resources\ScoreResource;
+
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/scores', function () {
+    return ScoreResource::collection(Score::paginate());
+});
+Route::post('/scores', 'ScoresController@post');

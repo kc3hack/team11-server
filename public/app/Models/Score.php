@@ -2,17 +2,24 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
- * Class Score
- * @package App\Models
- * @property integer id
- * @property float value
- * @property User
- * @property \DateTime created_at
+ * App\Models\Score
+ *
+ * @property int $id
+ * @property float $value
+ * @property int $user_id
+ * @property \Illuminate\Support\Carbon $created_at
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Score newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Score newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Score query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Score whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Score whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Score whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Score whereValue($value)
+ * @mixin \Eloquent
  */
-class Score extends Model
+class Score extends \Eloquent
 {
     const UPDATED_AT = null;
 
@@ -25,11 +32,32 @@ class Score extends Model
         'value'
     ];
 
-    /**
-     * ユーザーに関連する電話レコードを取得
-     */
-    public function user()
+    public function saveWithUser($username): bool
     {
-        return $this->hasOne('App\Models\User');
+        $user = new User();
+        $user->name = $username;
+
+        try {
+            \DB::transaction(function () use ($user) {
+                $user->save();
+                $this->user_id = $user->id;
+                $this->save();
+
+                return true;
+            });
+
+            return true;
+        } catch (\Exception $exception) {
+            var_dump($exception->getMessage());
+            return false;
+        }
+    }
+
+    public function getArrayView(): array
+    {
+        return [
+            'value' => $this->value,
+            'username' => User::find($this->id)->name
+        ];
     }
 }
