@@ -22,7 +22,7 @@ services:
       - mysql
 
   apache:
-    build: ../public
+    build: ../
     env_file: .env
     container_name: laravel_apache
     ports:
