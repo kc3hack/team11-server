@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Score;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ScoresController extends Controller
@@ -16,7 +17,11 @@ class ScoresController extends Controller
         $score = new Score();
         $score->value = $request->value;
 
-        if ($score->saveWithUser($request->username)) {
+        $user = new User();
+        $user->name = $request->username;
+        $user->is_admin = $request->query('user_type');
+
+        if ($score->saveWithUser($user)) {
             return response()->json($score->getArrayView(), 200);
         } else {
             return response()->json([

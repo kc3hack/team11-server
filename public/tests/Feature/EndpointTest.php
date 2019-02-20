@@ -18,7 +18,8 @@ class EndpointTest extends TestCase
                 'data' => [
                     '*' => [
                         'value',
-                        'username'
+                        'username',
+                        'user_type'
                     ]
                 ],
                 'links' => [
@@ -45,8 +46,11 @@ class EndpointTest extends TestCase
             'value' => 12.345,
             'username' => 'test-user'
         ];
+        $userType = 'student';
 
-        $response = $this->json('POST', '/scores', $mock);
+        $response = $this->json('POST', '/scores?user_type=' . $userType, $mock);
+
+        $mock += ['user_type' => $userType];
 
         $response
             ->assertStatus(200)

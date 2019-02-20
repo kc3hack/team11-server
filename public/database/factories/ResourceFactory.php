@@ -4,7 +4,8 @@ use Faker\Generator as Faker;
 
 $factory->define(\App\Models\User::class, function (Faker $faker) {
     return [
-        'name' => $faker->userName
+        'name' => $faker->userName,
+        'is_admin' => $faker->boolean
     ];
 });
 

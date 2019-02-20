@@ -32,11 +32,8 @@ class Score extends \Eloquent
         'value'
     ];
 
-    public function saveWithUser($username): bool
+    public function saveWithUser(User $user): bool
     {
-        $user = new User();
-        $user->name = $username;
-
         try {
             \DB::transaction(function () use ($user) {
                 $user->save();
@@ -55,9 +52,12 @@ class Score extends \Eloquent
 
     public function getArrayView(): array
     {
+        $user = User::find($this->id);
+
         return [
             'value' => $this->value,
-            'username' => User::find($this->id)->name
+            'username' => $user->name,
+            'user_type' => $user->is_admin
         ];
     }
 }
