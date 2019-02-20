@@ -7,7 +7,8 @@ namespace App\Models;
  *
  * @property int $id
  * @property float $value
- * @property int $user_id
+ * @property string $username
+ * @property string $user_type
  * @property \Illuminate\Support\Carbon $created_at
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Score newModelQuery()
@@ -29,33 +30,8 @@ class Score extends \Eloquent
      * @var array
      */
     protected $fillable = [
-        'value'
+        'value', 'username', 'user_type'
     ];
-
-    /**
-     * ユーザーと共にデータストアへ保存する。
-     *
-     * @param User $user
-     * @return bool
-     * @throws \Throwable
-     */
-    public function saveWithUser(User $user): bool
-    {
-        try {
-            \DB::transaction(function () use ($user) {
-                $user->save();
-                $this->user_id = $user->id;
-                $this->save();
-
-                return true;
-            });
-
-            return true;
-        } catch (\Exception $exception) {
-            var_dump($exception->getMessage());
-            return false;
-        }
-    }
 
     /**
      * 配列形式のViewを生成する。
@@ -64,12 +40,10 @@ class Score extends \Eloquent
      */
     public function getArrayView(): array
     {
-        $user = User::find($this->id);
-
         return [
             'value' => $this->value,
-            'username' => $user->name,
-            'user_type' => $user->is_admin
+            'username' => $this->username,
+            'user_type' => $this->user_type
         ];
     }
 }

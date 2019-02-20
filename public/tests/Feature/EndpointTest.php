@@ -10,7 +10,7 @@ class EndpointTest extends TestCase
 {
     public function testGetScore()
     {
-        $response = $this->json('GET', '/scores');
+        $response = $this->json('GET', '/scores?user_type=admin');
 
         $response
             ->assertStatus(200)
@@ -44,13 +44,11 @@ class EndpointTest extends TestCase
     {
         $mock = [
             'value' => 12.345,
-            'username' => 'test-user'
+            'username' => 'test-user',
+            'user_type' => 'admin'
         ];
-        $userType = 'student';
 
-        $response = $this->json('POST', '/scores?user_type=' . $userType, $mock);
-
-        $mock += ['user_type' => $userType];
+        $response = $this->json('POST', '/scores', $mock);
 
         $response
             ->assertStatus(200)

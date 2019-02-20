@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class DatabaseSeeder extends Seeder
+class ScoresTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,9 +11,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         $this->call([
-             ScoresTableSeeder::class,
-             TatekansTableSeeder::class
-         ]);
+        factory(\App\Models\Score::class, 50)->create();
     }
 }

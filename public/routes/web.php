@@ -18,7 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/scores', function () {
-    return ScoreResource::collection(Score::orderByDesc('value')->paginate(15));
-});
+Route::get('/scores', 'ScoresController@get');
 Route::post('/scores', 'ScoresController@post');

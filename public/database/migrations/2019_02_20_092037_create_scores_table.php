@@ -16,7 +16,8 @@ class CreateScoresTable extends Migration {
 		{
 			$table->increments('id');
 			$table->float('value', 10, 0);
-			$table->integer('user_id')->unsigned()->index('fk_scores_users_idx');
+			$table->string('username');
+			$table->string('user_type');
 			$table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
 		});
 	}
