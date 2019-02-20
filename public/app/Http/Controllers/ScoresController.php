@@ -20,7 +20,8 @@ class ScoresController extends Controller
         return ScoreResource::collection(
             Score::where(['user_type' => $request->query('user_type')])
                 ->orderByDesc('value')
-                ->paginate(15)
+                ->limit(15)
+                ->get()
         );
     }
 

@@ -21,21 +21,6 @@ class EndpointTest extends TestCase
                         'username',
                         'user_type'
                     ]
-                ],
-                'links' => [
-                    'first',
-                    'last',
-                    'prev',
-                    'next'
-                ],
-                'meta' => [
-                    'current_page',
-                    'from',
-                    'last_page',
-                    'path',
-                    'per_page',
-                    'to',
-                    'total'
                 ]
             ]);
     }
