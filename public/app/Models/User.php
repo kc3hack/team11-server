@@ -31,7 +31,7 @@ class User extends \Eloquent
     ];
 
     /**
-     * ユーザーの種類を取得する
+     * ユーザーの種類を取得する。
      *
      * @param  string  $value
      * @return string
@@ -42,7 +42,7 @@ class User extends \Eloquent
     }
 
     /**
-     * ユーザーの種類を設定する
+     * ユーザーの種類を設定する。
      *
      * @param  string  $value
      * @return void

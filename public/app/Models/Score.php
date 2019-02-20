@@ -32,6 +32,13 @@ class Score extends \Eloquent
         'value'
     ];
 
+    /**
+     * ユーザーと共にデータストアへ保存する。
+     *
+     * @param User $user
+     * @return bool
+     * @throws \Throwable
+     */
     public function saveWithUser(User $user): bool
     {
         try {
@@ -50,6 +57,11 @@ class Score extends \Eloquent
         }
     }
 
+    /**
+     * 配列形式のViewを生成する。
+     *
+     * @return array
+     */
     public function getArrayView(): array
     {
         $user = User::find($this->id);
