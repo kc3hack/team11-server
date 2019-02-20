@@ -11,12 +11,13 @@
 |
 */
 
-use App\Models\Score;
-use App\Http\Resources\ScoreResource;
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'TatekansController@index');
+Route::post('tatekans/upload', 'TatekansController@upload');
+Route::get('tatekans', 'TatekansController@get');
 
 Route::get('/scores', 'ScoresController@get');
 Route::post('/scores', 'ScoresController@post');
