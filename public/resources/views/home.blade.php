@@ -49,6 +49,8 @@
 
 <form action="{{ url('tatekans/upload') }}" method="POST" enctype="multipart/form-data">
     <label for="photo"><h3>タテカン画像</h3></label>
+    <div>1画像あたりファイルサイズは1MBまで、ピクセル解像度は128x128〜2048x2048まで</div>
+    <br>
     <input type="file" class="form-control" name="file"/>
     <div class="preview"></div>
     <br>

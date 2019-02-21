@@ -46,16 +46,11 @@ class TatekansController extends Controller
     {
         $this->validate($request, [
             'file' => [
-                // 必須
                 'required',
-                // アップロードされたファイルであること
                 'file',
-                // 画像ファイルであること
                 'image',
-                // MIMEタイプを指定
                 'mimes:png',
-                // 最小縦横120px 最大縦横400px
-                'dimensions:min_width=100,min_height=100,max_width=500,max_height=500',
+                'dimensions:min_width=128,min_height=128,max_width=2048,max_height=2048',
             ]
         ]);
 
