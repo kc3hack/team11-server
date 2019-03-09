@@ -39,7 +39,7 @@ $ cd docker
 $ docker-compose build
 $ docker tag docker_apache asia.gcr.io/kc3-winter-team11/team11-server
 $ yes | docker image prune
-# docker push asia.gcr.io/kc3-winter-team11/team11-server
+$ docker push asia.gcr.io/kc3-winter-team11/team11-server
 ```
 1. 上記コマンドを実行
 1. GCPコンソールを開き、GCEのVMインスタンスからセットアップしたインスタンスを選択
